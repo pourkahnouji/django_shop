@@ -10,8 +10,8 @@ def index(request):
 
 
 def register(request):
-    # if request.user.is_authenticated:
-    #     return redirect('templates:index')
+    if request.user.is_authenticated:
+        return redirect('templates:index')
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
