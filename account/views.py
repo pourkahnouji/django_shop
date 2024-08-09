@@ -4,6 +4,7 @@ from .models import ShopUser
 from .forms import *
 from django.contrib import messages
 
+# test
 def index(request):
     return render(request, 'account/index.html')
 
