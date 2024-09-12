@@ -34,3 +34,9 @@ class RegisterForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('no match password!!!')
         return self['password2']
+
+
+class LoginForm(forms.Form):
+    phone = forms.CharField(max_length=11)
+    password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+                               label='پسورد')
