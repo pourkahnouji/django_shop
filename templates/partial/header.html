@@ -1,0 +1,20 @@
+<!-- search field -->
+<form action="{% url 'templates:search' %}" method="get">
+    <input type="text" name="query" required placeholder="عبارت مدنظر را وارد کنید">
+    <input type="submit" value="search">
+</form>
+<a href="{% url 'templates:index' %} " class="btn btn-primary">home</a>
+<!-- profile link -->
+{% if request.user.is_authenticated %}
+    <div>
+        <p><a href="{% url 'templates:register' %} " class="btn btn-info">profile</a></p>
+        <a href="#">{{ request.user.username }}</a>
+        <a href="{% url 'templates:logout' %}" class="btn btn-danger">logout</a>
+    </div>
+{% else %}
+    <!-- ___________________ login & register button ___________________ -->
+    <!-- login button -->
+    <a href="{% url 'templates:login' %}" class="btn btn-info">Login</a>
+    <!-- register button -->
+    <a href="{% url 'templates:register' %} " class="btn btn-primary">Register</a>
+{% endif %}

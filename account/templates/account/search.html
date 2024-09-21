@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} search{% endblock %}
+
+{% block content %}
+    {% if query %}
+        {{ results.count }}برابر با : {{ query }}       نتایج جست و جو برای
+    {% endif %}
+    {% for post in results %}
+        {{ post.phone }}
+
+    {% empty %}
+        چیزی برای نمایش وجود ندارد
+    {% endfor %}
+{% endblock %}
