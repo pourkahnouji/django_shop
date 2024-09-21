@@ -59,12 +59,18 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+
                     messages.success(request, f'wellcome {request.user.first_name} {request.user.last_name}', 'success')
+
                     return redirect('templates:index')
                 else:
                     return HttpResponse('Your account is disabled!')
             else:
+
                 messages.error(request, 'name or password is wrong!!!', 'danger')
+
+                messages.error(request, 'wrong phone or password')
+
                 return redirect('templates:login')
 
     else:
@@ -75,6 +81,7 @@ def user_login(request):
 
 def log_out(request):
     logout(request)
+
     messages.error(request, 'با موفقیت خارج شدید!', 'danger')
     return redirect('templates:index')
 
@@ -94,3 +101,4 @@ def search(request):
         'results': results,
     }
     return render(request, 'account/search.html', {'context': context})
+        # return HttpResponse('exit')
