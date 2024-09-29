@@ -7,7 +7,7 @@
 <!-- profile link -->
 {% if request.user.is_authenticated %}
     <div>
-        <p><a href="{% url 'templates:register' %} " class="btn btn-info">profile</a></p>
+        <p><a href="{% url 'templates:index' %} " class="btn btn-info">profile</a></p>
         <a href="#">{{ request.user.username }}</a>
         <a href="{% url 'templates:logout' %}" class="btn btn-danger">logout</a>
     </div>

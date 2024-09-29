@@ -29,10 +29,22 @@ class RegisterForm(forms.ModelForm):
 
         }
 
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if not phone.isdigit():
+            raise forms.ValidationError('شماره تلفن باید عددی باشد')
+
+        if len(phone) != 11:
+            raise forms.ValidationError('شماره تلفن باید 11 رقمی باشد')
+
+        if not phone.startswith('09'):
+            raise forms.ValidationError('شماره تلفن با 09 آغاز شود')
+        return phone
+
     def clean_password2(self):
 
         cd = self.cleaned_data
-        if len(cd['password']) <= 8:
+        if len(cd['password']) <= 7:
             raise forms.ValidationError('password too weak!!\nless than 8 character')
         if cd['password'] == '12345678':
             raise forms.ValidationError('too common use another password')
