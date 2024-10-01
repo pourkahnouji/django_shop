@@ -4,30 +4,24 @@ from .models import *
 
 # Register your models here.
 
-
-class FeatureInline(admin.TabularInline):
-    model = ProductFeatures
+class FeaturesInline(admin.TabularInline):
+    model = ProductFeature
     extra = 0
 
 
 class ImageInline(admin.TabularInline):
-    model = Images
+    model = Image
     extra = 0
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'inventory', 'price', 'offers', 'new_price', 'created_at']
+    list_display = ['name', 'category', 'inventory', 'price', 'discount', 'new_price']
     prepopulated_fields = {'slug': ('name',)}
-    inlines = [FeatureInline, ImageInline]
+    inlines = [FeaturesInline, ImageInline]
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
-
-
-@admin.register(ProductFeatures)
-class FeatureAdmin(admin.ModelAdmin):
-    list_display = ['name', 'value', 'product']

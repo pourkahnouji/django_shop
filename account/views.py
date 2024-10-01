@@ -29,20 +29,20 @@ def index(request):
 
 def register(request):
     if request.user.is_authenticated:
-        return redirect('templates:login')
+        return redirect('account:login')
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             phone = form.cleaned_data['phone']
             if ShopUser.objects.filter(phone=phone).exists():
                 messages.error(request, 'phone is exists', 'danger')
-                return redirect('templates:login')
+                return redirect('account:login')
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
-            messages.success(request, f'wellcome ', 'success')
+            messages.success(request, f'wellcome {request.user}', 'success')
 
-            return redirect('templates:login')
+            return redirect('account:login')
 
     else:
         form = RegisterForm()
@@ -62,7 +62,7 @@ def user_login(request):
 
                     messages.success(request, f'wellcome {request.user.first_name} {request.user.last_name}', 'success')
 
-                    return redirect('templates:index')
+                    return redirect('account:index')
                 else:
                     return HttpResponse('Your account is disabled!')
             else:
@@ -71,7 +71,7 @@ def user_login(request):
 
                 messages.error(request, 'wrong phone or password')
 
-                return redirect('templates:login')
+                return redirect('account:login')
 
     else:
         form = LoginForm()
@@ -83,7 +83,7 @@ def log_out(request):
     logout(request)
 
     messages.error(request, 'با موفقیت خارج شدید!', 'danger')
-    return redirect('templates:index')
+    return redirect('account:index')
 
 
 def search(request):
