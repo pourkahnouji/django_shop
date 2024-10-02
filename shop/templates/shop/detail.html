@@ -1,0 +1,34 @@
+{% block content %}
+    <div class="heading-text">
+        <h1>جزئیات محصول</h1>
+    </div>
+
+
+    <div class="product-detail">
+        <h2>{{ product.name }}</h2>
+        <p>دسته بندی: {{ product.category }}</p>
+        <p>موجودی: {{ product.inventory }}</p>
+        <ul>
+            {% for feature in product.features.all %}
+                <li>{{ feature.name }}: {{ feature.value }}</li>
+            {% endfor %}
+        </ul>
+
+        <div class="price">
+            <span class="original-price">قیمت: {{ product.price }}</span>
+            <br>
+            <span class="discounted-price">قیمت پس از تخفیف: {{ product.new_price }}</span>
+        </div>
+    </div>
+
+    <div class="product-images">
+        {% for image in product.images.all %}
+            <img src="{{ image.image_file.url }}" alt="{{ image.title }}">
+        {% endfor %}
+    </div>
+
+    <div class="product-description">
+        <h3>description</h3>
+        <p>{{ product.description }}</p>
+    </div>
+{% endblock %}

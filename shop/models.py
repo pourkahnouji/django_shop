@@ -42,6 +42,9 @@ class Product(models.Model):
             models.Index(fields=['created'])
         ]
 
+    def get_absolute_url(self):
+        return reverse('shop:product_detail', kwargs={'id': self.id, 'slug': self.slug})
+
     def __str__(self):
         return self.name
 
