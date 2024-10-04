@@ -28,6 +28,7 @@ class Product(models.Model):
     description = models.TextField()
     inventory = models.PositiveIntegerField(default=0)
     price = models.PositiveIntegerField(default=0)
+    weight = models.PositiveIntegerField(default=0)
     discount = models.PositiveIntegerField(default=0)
     new_price = models.PositiveIntegerField(default=0)
 
