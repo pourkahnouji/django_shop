@@ -45,5 +45,13 @@ class Cart:
         if total_post_price < 2000:
             return 3000
 
+    def get_total_price(self):
+        total_price = sum(item['price'] * item['quantity'] for item in self.cart.values())
+        return total_price
+
+    def get_final_price(self):
+        final_price = self.get_total_price() + self.get_post_price()
+        return final_price
+
     def save(self):
         self.session.modified = True
