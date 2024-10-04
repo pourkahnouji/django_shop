@@ -33,7 +33,17 @@ class Cart:
         self.save()
 
     def clear(self):
-        del self.session['catr']
+        del self.session['cart']
         self.save()
+
+    def get_post_price(self):
+        total_post_price = sum(item['quantity'] * item['weight'] for item in self.cart.values())
+        if total_post_price < 1000:
+            return 100
+        if 1000 < total_post_price < 2000:
+            return 200
+        if total_post_price < 2000:
+            return 3000
+
     def save(self):
         self.session.modified = True
