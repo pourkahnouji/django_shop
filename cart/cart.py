@@ -53,5 +53,19 @@ class Cart:
         final_price = self.get_total_price() + self.get_post_price()
         return final_price
 
+    def __len__(self):
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def __iter__(self):
+        product_ids = list(self.cart.keys())
+        products = Product.objects.filter(id__in=product_ids)
+        cart_dict = self.cart.copy()
+        for product in products:
+            cart_dict[str(product.id)]['product'] = product
+
+        for item in self.cart.values():
+            yield item
+
+
     def save(self):
         self.session.modified = True
