@@ -66,6 +66,5 @@ class Cart:
         for item in self.cart.values():
             yield item
 
-
     def save(self):
         self.session.modified = True
